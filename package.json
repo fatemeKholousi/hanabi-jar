@@ -1,0 +1,20 @@
+{
+  "name": "hanabi-jar-backend",
+  "version": "1.0.0",
+  "description": "backend of bookstore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bookstore/hanabi-jar"
+  ],
+  "author": "fateme kholousi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "joi": "^17.6.0",
+    "mongoose": "^6.2.0",
+    "nodemon": "^2.0.15"
+  }
+}
