@@ -32,18 +32,18 @@ router.get('/', async (req, res) => {
 })
 
 //don't forget json type in postman
-router.post('/', upload.single('productImage'), async (req, res) => {
+router.post('/', upload.single('coverImage'), async (req, res) => {
   const { error } = validateProduct(req.body)
   if (error) {
     return res.status(400).send(error.details[0].message)
   }
-  console.log(req.file)
+  console.log(req.file.path)
   let product = new Product({
     name: req.body.name,
     genre: req.body.genre,
     author: req.body.author,
     summary: req.body.summary,
-    cover: req.body.cover,
+    coverImage: req.file.path,
     stock: req.body.stock,
     publishedYear: req.body.publishedYear,
   })
@@ -59,7 +59,7 @@ router.put('/:id', async (req, res) => {
     genre: req.body.genre,
     author: req.body.author,
     summary: req.body.summary,
-    cover: req.body.cover,
+    coverImage: req.body.coverImage,
     stock: req.body.stock,
     publishedYear: req.body.publishedYear,
   })
