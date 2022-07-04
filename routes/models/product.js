@@ -19,12 +19,12 @@ const validateProduct = (product) => {
     genre: Joi.string().min(2).max(50),
     summary: Joi.string().min(10).max(1000),
     coverImage: Joi.string(),
-
     stock: Joi.number().required(),
     publishedYear: Joi.string(),
   })
   return schema.validate(product)
 }
 
-exports.Product = Product
 exports.validate = validateProduct
+exports.Product = Product
+
