@@ -1,11 +1,13 @@
 const express = require('express')
-require('dotenv').config()
 const genres = require('./routes/genres')
 const customers = require('./routes/customers')
 const products = require('./routes/products')
 const users = require('./routes/users')
 const auth = require('./routes/auth')
 const app = express()
+
+require('dotenv').config()
+// require('./startup/prod')(app)
 
 if (!process.env.jwtPrivateKey) {
   console.error('Fatal Error:JWT Private Key is not defined')

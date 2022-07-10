@@ -30,7 +30,9 @@ const upload = multer({
 })
 
 router.get('/', async (req, res) => {
-  const products = await Product.find().sort('name')
+  const products = await Product.find()
+  // const products = await Product.find().sort('name')
+
   res.send(products)
 })
 
