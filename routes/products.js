@@ -47,7 +47,6 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-  console.log(req)
   const product = await Product.findById(req.params.id)
   if (!product) return res.status(404).send('this is a 404, not found')
   res.send(product)
@@ -72,19 +71,20 @@ router.post('/', auth, upload.single('coverImage'), async (req, res) => {
   res.send(product)
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, upload.single('coverImage'), async (req, res) => {
   const { error } = validateProduct(req.body)
   if (error) return res.status(400).send(error.details[0].message)
-  const product = await Product.findByIdAndUpdate(req.params._id, {
+  const product = await Product.findByIdAndUpdate(req.params.id, {
     name: req.body.name,
     genre: req.body.genre,
     author: req.body.author,
     summary: req.body.summary,
-    coverImages: req.file.path,
     stock: req.body.stock,
     publishedYear: req.body.publishedYear,
+    coverImage: req.file.path,
   })
   if (!product) return res.status(404).send('this is a 404, not found')
+  console.log(product)
   res.send(product)
 })
 
