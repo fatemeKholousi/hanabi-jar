@@ -84,10 +84,21 @@ router.put('/:id', auth, upload.single('coverImage'), async (req, res) => {
     coverImage: req.file.path,
   })
   if (!product) return res.status(404).send('this is a 404, not found')
-  console.log(product)
+  // console.log(Product.find({ id: req.params.id }).select('coverImage').)
   res.send(product)
 })
 
+router.patch('/:id', auth, upload.single('coverImage'), async (req, res) => {
+  const { error } = validateProduct(req.body)
+  if (error) return res.status(400).send(error.details[0].message)
+  // const updates = [req.body, req.file.path]
+  const product = await Product.findByIdAndUpdate(req.params.id, {
+    $set: req.body,
+    // $set: req.file.path,
+  })
+  if (!product) return res.status(404).send('this is a 404, not found')
+  res.send(product)
+})
 router.delete('/:id', [auth, admin], async (req, res) => {
   const product = await Product.findByIdAndRemove(req.params.id)
   removeImageLocally(product.coverImage)
